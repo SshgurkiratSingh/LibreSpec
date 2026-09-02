@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// Mobile -> ESP32: RPC Handshake
+message DeviceIntent {
+  uint32 request_id = 1;
+  string target_operation = 2; // e.g., "START_ACQUISITION"
+}
+
+// ESP32 -> Mobile: Continuous 10Hz Telemetry
+message SpectralTelemetry {
+  uint32 timestamp_ms = 1;
+  uint32 sequence_number = 2;
+  // 14 channels: F1-F8, FZ, FY, FX, NIR, Clear, Flicker
+  repeated uint32 spectral_channels = 3; 
+}
