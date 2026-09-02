@@ -236,10 +236,10 @@ void setup() {
     Wire.endTransmission();
     delay(10);
     
-    // Turn on the built-in LED (Maximum Brightness)
+    // Turn on the built-in LED (Safe Current)
     Wire.beginTransmission(AS7343_ADDR);
     Wire.write(0xCD); // AS7343 LED register
-    Wire.write(0xFF); // 0x80 (LED_ACT) | 0x7F (Max Current)
+    Wire.write(0x89); // 0x80 (LED_ACT) | 0x09 (Safe low current ~10mA)
     Wire.endTransmission();
     delay(10);
     
