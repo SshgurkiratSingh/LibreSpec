@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.librespec.app-mergeDebugResources-46:/values-port/values-port.xml",
+            "outputFile": "com.librespec.app-mergeDebugResources-56:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/home/gurkirat/.gradle/caches/9.3.0/transforms/06cf484caac664fc28997cbfe01815be/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
+                    "source": "/home/gurkirat/.gradle/caches/9.3.0/transforms/4c85cad6d292ebdbf17c07554ff9e0cb/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

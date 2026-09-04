@@ -1,10 +1,10 @@
 [
     {
-        "merged": "com.librespec.app-debug-48:/mipmap_ic_launcher_round.xml.flat",
-        "source": "com.librespec.app-main-50:/mipmap/ic_launcher_round.xml"
+        "merged": "com.librespec.app-debug-58:/mipmap_ic_launcher_round.xml.flat",
+        "source": "com.librespec.app-main-60:/mipmap/ic_launcher_round.xml"
     },
     {
-        "merged": "com.librespec.app-debug-48:/mipmap_ic_launcher.xml.flat",
-        "source": "com.librespec.app-main-50:/mipmap/ic_launcher.xml"
+        "merged": "com.librespec.app-debug-58:/mipmap_ic_launcher.xml.flat",
+        "source": "com.librespec.app-main-60:/mipmap/ic_launcher.xml"
     }
 ]

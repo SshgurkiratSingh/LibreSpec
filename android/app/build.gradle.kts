@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.protobuf")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -22,8 +23,6 @@ android {
     buildFeatures {
         compose = true
     }
-    
-
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -33,8 +32,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    
-
 }
 
 protobuf {
@@ -62,6 +59,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Protobuf Lite
     implementation("com.google.protobuf:protobuf-javalite:3.24.0")
@@ -70,4 +68,22 @@ dependencies {
     implementation("com.patrykandpatrick.vico:compose:1.13.0")
     implementation("com.patrykandpatrick.vico:compose-m3:1.13.0")
     implementation("com.patrykandpatrick.vico:core:1.13.0")
+    
+    // Room Database
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+
+    // WorkManager
+    val workVersion = "2.9.0"
+    implementation("androidx.work:work-runtime-ktx:$workVersion")
+
+    // Retrofit2
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.11.0")
+    
+    // Location
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
