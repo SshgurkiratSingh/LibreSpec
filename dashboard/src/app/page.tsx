@@ -1,8 +1,9 @@
 import TelemetryGrid from '@/components/TelemetryGrid';
 import { Activity } from 'lucide-react';
+import { ForensicLog } from '@/types';
 
 export default async function Dashboard() {
-  let logs: any[] = [];
+  let logs: ForensicLog[] = [];
   const substances = ['Cathinone', 'Cocaine', 'MDMA', 'Methamphetamine'];
 
   try {

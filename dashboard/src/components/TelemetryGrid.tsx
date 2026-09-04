@@ -11,11 +11,11 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { Beaker, ShieldCheck, Clock, Activity } from 'lucide-react';
-
+import { ShieldCheck, Clock, Activity, Beaker } from 'lucide-react';
 import Link from 'next/link';
+import { ForensicLog } from '@/types';
 
-export default function TelemetryGrid({ data }: { data: any[] }) {
+export default function TelemetryGrid({ data }: { data: ForensicLog[] }) {
   if (!data || data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-slate-400">
@@ -53,7 +53,11 @@ export default function TelemetryGrid({ data }: { data: any[] }) {
                 </span>
                 <span className="text-xs text-slate-500 mt-2 flex items-center gap-1">
                   <Clock className="w-3 h-3" />
-                  {new Date(log.timestamp).toLocaleString()}
+                  {new Date(
+                    String(log.timestamp).length === 10 
+                      ? Number(log.timestamp) * 1000 
+                      : Number(log.timestamp)
+                  ).toLocaleString()}
                 </span>
               </div>
             </div>
@@ -82,7 +86,7 @@ export default function TelemetryGrid({ data }: { data: any[] }) {
             <div className="p-4 bg-slate-950 flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-slate-800 gap-4">
               <div className="flex items-center gap-2 text-xs text-slate-400 font-mono truncate max-w-full">
                 <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span className="truncate">Seal: {log.cryptographic_seal}</span>
+                <span className="truncate">Seal: {log.cryptographic_seal || log.baseline_hmac || 'Unverified'}</span>
               </div>
               <Link 
                 href={`/sample/${log.test_id}`}

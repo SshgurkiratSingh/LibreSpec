@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Beaker, ShieldCheck, Clock, CheckCircle } from 'lucide-react';
 import SampleCharts from '@/components/SampleCharts';
+import { ForensicLog } from '@/types';
 
 // Since we cannot alter the Lambda function to add a specific get-by-id endpoint,
 // we fetch the latest logs for known substances and search for our sample.
 async function getSampleData(id: string) {
   const substances = ['Cathinone', 'Cocaine', 'MDMA', 'Methamphetamine'];
-  let allLogs: any[] = [];
+  let allLogs: ForensicLog[] = [];
   
   for (const substance of substances) {
     try {
@@ -43,8 +44,8 @@ export default async function SamplePage({ params }: { params: { id: string } })
   }));
 
   const location = { 
-    lat: sample.latitude ?? 37.7749, 
-    lng: sample.longitude ?? -122.4194 
+    lat: Number(sample.latitude ?? sample.gps_latitude ?? 37.7749), 
+    lng: Number(sample.longitude ?? sample.gps_longitude ?? -122.4194) 
   };
 
   return (
@@ -86,7 +87,13 @@ export default async function SamplePage({ params }: { params: { id: string } })
               <Clock className="w-5 h-5 text-blue-400" />
               <h3 className="font-semibold text-white">Timestamp</h3>
             </div>
-            <p className="text-lg">{new Date(sample.timestamp).toLocaleString()}</p>
+            <p className="text-lg">
+              {new Date(
+                String(sample.timestamp).length === 10 
+                  ? Number(sample.timestamp) * 1000 
+                  : Number(sample.timestamp)
+              ).toLocaleString()}
+            </p>
           </div>
 
           <div className="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 flex flex-col gap-3">
@@ -95,7 +102,7 @@ export default async function SamplePage({ params }: { params: { id: string } })
               <h3 className="font-semibold text-white">Cryptographic Seal</h3>
             </div>
             <p className="font-mono text-sm text-slate-300 break-all bg-slate-950/50 p-2 rounded-lg">
-              {sample.cryptographic_seal}
+              {sample.cryptographic_seal || sample.baseline_hmac || 'Unverified'}
             </p>
           </div>
 
