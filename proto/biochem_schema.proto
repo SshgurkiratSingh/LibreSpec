@@ -12,4 +12,5 @@ message SpectralTelemetry {
   uint32 sequence_number = 2;
   // 14 channels: F1-F8, FZ, FY, FX, NIR, Clear, Flicker
   repeated uint32 spectral_channels = 3; 
+  float ambient_temperature_c = 4;
 }

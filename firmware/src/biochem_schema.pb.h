@@ -23,6 +23,7 @@ typedef struct _SpectralTelemetry {
     /* 14 channels: F1-F8, FZ, FY, FX, NIR, Clear, Flicker */
     pb_size_t spectral_channels_count;
     uint32_t spectral_channels[14];
+    float ambient_temperature_c;
 } SpectralTelemetry;
 
 
@@ -42,6 +43,8 @@ extern "C" {
 #define SpectralTelemetry_timestamp_ms_tag       1
 #define SpectralTelemetry_sequence_number_tag    2
 #define SpectralTelemetry_spectral_channels_tag  3
+#define SpectralTelemetry_ambient_temperature_c_tag 4
+
 
 /* Struct field encoding specification for nanopb */
 #define DeviceIntent_FIELDLIST(X, a) \
@@ -53,7 +56,8 @@ X(a, STATIC,   SINGULAR, STRING,   target_operation,   2)
 #define SpectralTelemetry_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   timestamp_ms,      1) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   2) \
-X(a, STATIC,   REPEATED, UINT32,   spectral_channels,   3)
+X(a, STATIC,   REPEATED, UINT32,   spectral_channels,   3) \
+X(a, STATIC,   SINGULAR, FLOAT,    ambient_temperature_c, 4)
 #define SpectralTelemetry_CALLBACK NULL
 #define SpectralTelemetry_DEFAULT NULL
 

@@ -80,11 +80,33 @@ fun GraphScreen(bleRepository: BleRepository) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "LibreSpec AS7343",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
+        val matchResult by com.librespec.service.MatcherService.matchResultFlow.collectAsState()
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "LibreSpec AS7343",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+            if (matchResult != null) {
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = "Match: ${matchResult!!.materialName}",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "${String.format("%.1f", matchResult!!.confidenceScore)}% [${matchResult!!.phase}]",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 

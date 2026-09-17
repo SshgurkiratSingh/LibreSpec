@@ -158,6 +158,9 @@ void as7343_daq_task(void *pvParameters) {
             telemetry.spectral_channels[12] = 0;
             telemetry.spectral_channels[13] = 0;
             
+            // Populate ambient temperature (dummy value for Arrhenius compensation testing)
+            telemetry.ambient_temperature_c = 25.4f;
+            
             if (is_streaming) {
                 uint8_t buffer[64];
                 pb_ostream_t stream = pb_ostream_from_buffer(buffer, sizeof(buffer));
